@@ -1,0 +1,2 @@
+<!-- show category name -->
+SELECT categories.name FROM `books` LEFT JOIN categories on books.category_id=categories.id GROUP BY categories.name;

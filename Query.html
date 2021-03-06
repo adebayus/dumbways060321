@@ -1,0 +1,41 @@
+<!-- create table categories -->
+CREATE TABLE categories (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+<!-- Create table books -->
+
+CREATE TABLE books (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    stock int,
+    image varchar(255) NOT NULL,
+    deskripsi text,
+    category_id int, 
+    PRIMARY KEY(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+<!--  Tampilkan hasil query post tambah buku dan Kategori -->
+INSERT INTO categories (id, name) VALUES (NULL, 'Matematika');
+INSERT INTO categories (id, name) VALUES (NULL, 'Bahasa Indonesia');
+INSERT INTO categories (id, name) VALUES (NULL, 'Biologi'), (NULL, 'Fisika'), (NULL, 'Kimia'), (NULL, 'Administrasi'), (NULL, 'Algoritma Dasar'), (NULL, 'Geologi'), (NULL, 'Pendidikan Kewarganegaraan'), (NULL, 'Sosiologi');
+
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Belajar Berhitung', '100', 'book.jpg', 'buku mengenai pembelajaran untuk tingkat Sekolah dasar', '1');
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Belajar aljabar', '100', 'book.jpg', 'buku mengenai pembelajaran untuk tingkat Sekolah Menengah Atas', '1');
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Anatomi Tumbuhan', '100', 'book.jpg', 'buku mengenai pembelajaran untuk tingkat Sekolah Menengah Pertama', '3');
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Anatomi Hewan', '150', 'book.jpg', 'buku mengenai pembelajaran untuk tingkat Sekolah Menengah Pertama', '3');
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Buku teks mahir berbahasa indonesia', '50', 'book.jpg', 'buku mengenai pembelajaran bahasa indonesia', '2');
+INSERT INTO books (id,name, stock,image, deskripsi, category_id) VALUES (NULL, 'Buku teks esps berbahasa indonesia', '50', 'book.jpg', 'buku mengenai pembelajaran bahasa indonesia', '2');
+
+<!-- tampilkan semua buku  -->
+SELECT * FROM books;
+
+<!-- tampilkan produk per kategori, field ditampilkan nama kategori, nama buku, stock  -->
+SELECT categories.name as 'category name' , books.name as 'books name', books.stock FROM books JOIN categories ON books.category_id = categories.id WHERE books.category_id = 1;
+
+<!-- tampilkan detail buku berdasarkan id -->
+
+SELECT categories.name as 'category name', books.name as 'book name', books.stock, books.image, books.deskripsi FROM books JOIN categories ON books.category_id=categories.id WHERE books.id =1;
